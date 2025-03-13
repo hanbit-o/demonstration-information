@@ -58,7 +58,7 @@ def get_config(config_str="square/mh,sa,seed"):
     dataloader = dict(
         datasets={
             ds.replace("/", "_"): dict(
-                path="path/to/robomimic_rlds_v2/{ds}/1.0.0".format(ds=ds),
+                path="/home/hanbit-o/code/openx/demonstration-information/dataset/{ds}/robo_mimic/1.0.0".format(ds=ds),
                 train_split="train",
                 val_split="val",
                 transform=ModuleSpec.create(robomimic_dataset_transform),
@@ -101,10 +101,12 @@ def get_config(config_str="square/mh,sa,seed"):
             dataloader=dataloader,
             optimizer=optimizer,
             lr_schedule=lr_schedule,
-            steps=50000,
+            # steps=50000,
+            steps=5000,
             log_freq=500,
             val_freq=2500,
-            save_freq=10000,
+            save_freq =1000,
+            # save_freq=10000,
             val_steps=25,
             seed=seed,
         )

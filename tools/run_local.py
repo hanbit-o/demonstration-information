@@ -15,6 +15,7 @@ if __name__ == "__main__":
     parser.add_argument("--prefix", type=str, default=None)
 
     args = parser.parse_args()
+    
 
     if MANUAL_SWEEP is not None:
         scripts = []
@@ -50,6 +51,9 @@ if __name__ == "__main__":
                 prefix = f.read()
         for split in range(args.save_split):
             output_file = os.path.join(f"{args.split_dir}/job_{split}.sh")
+            if not os.path.exists(args.split_dir):
+                os.makedirs(args.split_dir)
+            print(output_file)
             with open(output_file, "w") as f:
                 f.write(prefix)
                 for command in commands[

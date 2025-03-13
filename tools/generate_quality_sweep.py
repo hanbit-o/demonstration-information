@@ -87,6 +87,7 @@ if __name__ == "__main__":
     file_map = dict()
     run_set = set()
     for f in files:
+        print(f)
         if not f.startswith("config-"):
             continue
         assert f.startswith("config-"), "Config type was not properly specified for: " + f
@@ -173,6 +174,7 @@ if __name__ == "__main__":
                                     + model_args[model_type].split(split_by + "-")[1].split("_")[0]
                                 )
                     path = os.path.join(args.output, env, estimator_with_additional_groups, "seed-" + str(seed))
+                    print(path)
                     command_str.append("--path=" + path)
 
                     command = " ".join(command_str)

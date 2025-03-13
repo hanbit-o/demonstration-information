@@ -64,6 +64,7 @@ def main(_):
     jitted_pred_fn = jax.jit(pred_fn, in_shardings=(dp_sharding, None), out_shardings=(rep_sharding, rep_sharding))
     rng = jax.random.key(jax.process_index())
     scores = quality_estimators.estimate_quality(ds, jitted_pred_fn, dataset_ids, rng)
+    # import ipdb; ipdb.set_trace()
 
     pprint.pprint(scores)
 
@@ -83,6 +84,8 @@ def main(_):
                 idxs = list(ds_scores["ep_idx"].keys())
                 x = np.array([ds_scores["quality_by_ep_idx"][idx] for idx in idxs])
                 y = np.array([ds_scores["ep_idx"][idx] for idx in idxs])
+                print("X:", x)
+                print("Y:", y)
                 r = stats.pearsonr(x, y)
                 print("R:", r)
 

@@ -41,7 +41,7 @@ def ksg_estimator(batch, rng, ks, obs_alg, obs_state, action_alg, action_state):
     obs_rng, action_rng = jax.random.split(rng)
     z_obs = obs_alg.predict(obs_state, batch, obs_rng)
     z_action = action_alg.predict(action_state, batch, action_rng)
-
+    # import ipdb; ipdb.set_trace()
     obs_dist = _l2_dists(z_obs)
     action_dist = _l2_dists(z_action)
 
@@ -319,14 +319,17 @@ def estimate_quality(ds, pred_fn, dataset_ids, rng):
         stats.append(pred[no_nan_idx])
         for k, v in attrs.items():
             attributes[k].append(v[no_nan_idx])
-
     # Concatenate everything
     stats = jnp.concatenate(stats, axis=0)
     attributes = {k: jnp.concatenate(v, axis=0) for k, v in attributes.items()}
 
     # Normalize
     stats = jnp.clip(stats, a_min=jnp.percentile(stats, 1), a_max=jnp.percentile(stats, 99))
-    stats = (stats - jnp.mean(stats)) / jnp.std(stats)
+    if jnp.std(stats) == 0:
+        stats = jnp.zeros_like(stats)
+    else:
+        stats = (stats - jnp.mean(stats)) / jnp.std(stats)
+    
 
     # Do only a single conversion to numpy
     stats = np.array(stats)

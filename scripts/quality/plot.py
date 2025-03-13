@@ -266,8 +266,10 @@ def main(_):
                 if FLAGS.type is not None:
                     estimators = [estimator for estimator in estimators if estimator in PLOT_TYPES[FLAGS.type]]
                 estimators = sorted(estimators, key=lambda x: ORDER.index(x))
+                # import ipdb; ipdb.set_trace()
                 for estimator in estimators:
                     seeds = glob(os.path.join(path, dataset, estimator, "*/*.pkl"))
+                    print(seeds)
                     xs, ys = list(
                         zip(
                             *(convert_to_threshold_curve(*load_scores(seed, estimator)) for seed in seeds), strict=False

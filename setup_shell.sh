@@ -1,12 +1,13 @@
+#!/bin/bash
 # Override with correct values for your system if non-default.
-CONDA_PATH=path/to/miniconda3/bin/activate
+CONDA_PATH=/home/hanbit-o/miniconda3/bin/activate
 ENV_NAME=openx
-REPO_PATH=path/to/demonstration-info
+REPO_PATH=/home/hanbit-o/code/openx/demonstration-information
 USE_MUJOCO_PY=true # For using mujoco py with RoboMimic
-WANDB_API_KEY="" # If you want to use wandb, set this to your API key.
+WANDB_API_KEY="8bf0d6a34840b565e1194be5722edef43948a278" # If you want to use wandb, set this to your API key.
 
 # Setup Conda
-source $CONDA_PATH
+# source $CONDA_PATH
 conda activate $ENV_NAME
 cd $REPO_PATH
 unset DISPLAY # Make sure display is not set or it will prevent scripts from running in headless mode.
@@ -14,6 +15,7 @@ unset DISPLAY # Make sure display is not set or it will prevent scripts from run
 if [ ! -z "$WANDB_API_KEY" ]; then
     echo "Using WandB."
     export WANDB_API_KEY=$WANDB_API_KEY
+    echo $WANDB_API_KEY
 fi
 
 if $USE_MUJOCO_PY; then
@@ -22,7 +24,6 @@ if $USE_MUJOCO_PY; then
         export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/nvidia
     fi
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/.mujoco/mujoco210/bin
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/.mujoco/mujoco200/bin
 fi
 
 # First check if we have a GPU available
