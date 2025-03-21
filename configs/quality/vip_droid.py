@@ -49,7 +49,7 @@ def get_config(config_str="pen_in_cup,1"):
     dataloader = dict(
         datasets={
             ds.replace("/", "_"): dict(
-                path="path/to/droid/{ds}/1.0.0".format(ds=ds),
+                path="home/hanbit-o/code/sub-goal-decomposed-vip/third_party/demonstration-information/dataset/{ds}/1.0.0".format(ds=ds),
                 train_split="train",
                 transform=ModuleSpec.create(droid_dataset_transform),
             ),

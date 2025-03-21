@@ -20,7 +20,7 @@ from openx.utils.spec import ModuleSpec
 def get_config(config_str="pen_in_cup,50,ksg,1"):
     env, percentile, estimator, seed = config_str.split(",")
     filter_path = os.path.join(
-        "path/to/droid/inference_all/",
+        "home/hanbit-o/code/sub-goal-decomposed-vip/third_party/demonstration-information/dataset/inference_all/",
         env.replace("/", "_"),
         estimator,
         "seed-" + seed,
@@ -52,7 +52,7 @@ def get_config(config_str="pen_in_cup,50,ksg,1"):
     dataloader = dict(
         datasets={
             env.replace("/", "_"): dict(
-                path="path/to/droid/{env}/1.0.0".format(env=env),
+                path="home/hanbit-o/code/sub-goal-decomposed-vip/third_party/demonstration-information/dataset/{env}/1.0.0".format(env=env),
                 train_split="train",
                 transform=ModuleSpec.create(droid_dataset_transform),
                 train_filter=ModuleSpec.create(filter_by_scores, filter_path, "ep_idx", percentile=float(percentile)),

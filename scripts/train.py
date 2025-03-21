@@ -252,7 +252,7 @@ def main(_):
 
         with timer("dataset"):
             batch = next(train_iterator)
-
+        
         with timer("train"):
             state, info = jitted_train_step(state, batch, rng)
             info["lr"] = lr_schedule(state.step)

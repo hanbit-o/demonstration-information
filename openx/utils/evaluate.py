@@ -24,7 +24,7 @@ def load_checkpoint(path: str, step: int | None = None, sharding: jax.sharding.S
         # The checkpoint step is included in the path, so get the path from there
         step = int(os.path.basename(path))
         path = os.path.dirname(path)
-
+    
     with tf.io.gfile.GFile(tf.io.gfile.join(path, "example_batch.msgpack"), "rb") as f:
         example_batch = flax.serialization.msgpack_restore(f.read())
 

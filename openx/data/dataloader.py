@@ -56,7 +56,6 @@ def make_dataloader(
         path = ds_config["path"]
         transform_fn = ModuleSpec.instantiate(ds_config["transform"])
         dataset_statistics_path = ds_config.get("dataset_statistics")
-
         # Add train split
         if ds_config.get("train_split"):
             split = ds_config["train_split"]

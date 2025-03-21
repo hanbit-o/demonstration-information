@@ -297,7 +297,7 @@ def compute_dataset_statistics(
             list_dset_stats = tf.nest.map_structure(
                 lambda x: x.tolist() if isinstance(x, np.ndarray) else x, dataset_statistics
             )
-            with tf.io.gfile.GFile(dataset_statistics_path, "w") as f:
+            with tf.io.gfile.GFile(dataset_statistics_path, "w+") as f:
                 json.dump(list_dset_stats, f, default=float, indent=4)
 
     return dataset_statistics

@@ -45,7 +45,7 @@ def get_config(config_str="square/mh,1"):
     dataloader = dict(
         datasets={
             ds.replace("/", "_"): dict(
-                path="path/to/robomimic_rlds_v2/{ds}/1.0.0".format(ds=ds),
+                path="/home/hanbit-o/code/sub-goal-decomposed-vip/third_party/demonstration-information/dataset/{ds}/robo_mimic/1.0.0".format(ds=ds),
                 train_split="train",
                 val_split="val",
                 transform=ModuleSpec.create(robomimic_dataset_transform),

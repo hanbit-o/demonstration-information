@@ -48,8 +48,11 @@ if __name__ == "__main__":
             # Load slurm prefix from path
             with open(args.prefix, "r") as f:
                 prefix = f.read()
+        
         for split in range(args.save_split):
-            output_file = os.path.join(f"{args.split_dir}/job_{split}.sh")
+            sweep_path = os.path.join(f"{args.split_dir}/{args.sweep.split('/')[-1].split('.')[0]}")
+            os.makedirs(sweep_path, exist_ok=True)
+            output_file = os.path.join(f"{sweep_path}/job_{split}.sh")
             with open(output_file, "w") as f:
                 f.write(prefix)
                 for command in commands[
